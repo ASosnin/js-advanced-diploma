@@ -10,7 +10,7 @@ import PositionedCharacter from './PositionedCharacter';
 export function* characterGenerator(
   allowedTypes,
   maxLevel,
-  positionGeneratior
+  positionGeneratior,
 ) {
   while (true) {
     const indexType = Math.floor(Math.random() * allowedTypes.length);
@@ -18,7 +18,7 @@ export function* characterGenerator(
     const allowedCharacter = new allowedTypes[indexType](level);
     const positionedCharacter = new PositionedCharacter(
       allowedCharacter,
-      positionGeneratior.next().value
+      positionGeneratior.next().value,
     );
     yield positionedCharacter;
   }
@@ -28,13 +28,13 @@ export function generateTeam(
   allowedTypes,
   maxLevel,
   characterCount,
-  positionGeneratior
+  positionGeneratior,
 ) {
   const team = [];
   const generator = characterGenerator(
     allowedTypes,
     maxLevel,
-    positionGeneratior
+    positionGeneratior,
   );
   for (let i = 0; i < characterCount; i += 1) {
     team.push(generator.next().value);
@@ -43,7 +43,7 @@ export function generateTeam(
 }
 
 export function* allowedPositionGenerator(side, size) {
-  let allowedIndex = new Set();
+  const allowedIndex = new Set();
   if (side === 'left') {
     for (let i = 0; i < size * size; i += size) {
       allowedIndex.add(i);

@@ -4,7 +4,10 @@ export default class GameStateService {
   }
 
   save(state) {
-    this.storage.setItem('state', JSON.stringify(state));
+    this.storage.setItem(
+      'state',
+      JSON.stringify({ ...state, teams: state.teams.toArray() }),
+    );
   }
 
   load() {

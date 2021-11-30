@@ -1,16 +1,15 @@
-
-import PositionedCharacter from "./PositionedCharacter";
+import PositionedCharacter from './PositionedCharacter';
 
 export default class Team {
-  constructor() {
-    this.members = new Set();
+  constructor(members) {
+    this.members = new Set(members);
   }
 
   add(member) {
     if (member instanceof PositionedCharacter) {
       if (this.members.has(member)) {
         throw new Error(
-          'Нельзя добавить персонажа, который уже есть в команде'
+          'Нельзя добавить персонажа, который уже есть в команде',
         );
       }
       this.members.add(member);
@@ -19,13 +18,11 @@ export default class Team {
     }
   }
 
-  addAll(...members) {
-    members.forEach((member) => {
-      this.members.add(member);
-    })
-  }
-
   toArray() {
     return [...this.members];
+  }
+
+  getInfoByIndex(index) {
+    return [...this.members].find((item) => item.position === index);
   }
 }

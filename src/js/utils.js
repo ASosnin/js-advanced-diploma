@@ -29,3 +29,11 @@ export function calcHealthLevel(health) {
 
   return 'high';
 }
+
+export function getTooltipMsg(character) {
+  const level = '\uD83C\uDF96';
+  const attack = '\u2694';
+  const defence = '\uD83D\uDEE1';
+  const health = '\u2764';
+  return `${level}${character.level} ${attack}${character.attack} ${defence}${character.defence} ${health}${character.health}`;
+}

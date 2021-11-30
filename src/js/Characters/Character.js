@@ -15,7 +15,7 @@ export default class Character {
     this.level += 1;
     this.attack = Math.max(
       this.attack,
-      (this.attack * (1.8 - this.health)) / 100
+      (this.attack * (1.8 - this.health)) / 100,
     );
     this.health = this.health + 80 > 100 ? 100 : this.health + 80;
   }

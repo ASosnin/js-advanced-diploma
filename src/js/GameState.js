@@ -1,8 +1,9 @@
 import themes from './themes';
+import Team from './Team';
 
 export default class GameState {
   constructor(object) {
-    this.teams = object.teams;
+    this.teams = new Team(object.teams);
     this.gameLevel = object.gameLevel;
     this.score = object.score;
     this._turnPlayer = object.turnPlayer;
@@ -10,10 +11,6 @@ export default class GameState {
 
   get isTurnPlayer() {
     return this._turnPlayer;
-  }
-
-  generateTeams() {
-
   }
 
   getLevelTheme() {
