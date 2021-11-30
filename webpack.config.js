@@ -2,25 +2,28 @@ const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const srcPath = path.join(__dirname, 'src');
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || 'localhost';
 
 module.exports = {
   target: 'web',
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
       {
-        test: /\.(png|jpg|jpeg|ico|svg|gif)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: { limit: 8192 },
+        test: /.(jpg|jpeg|gif|png|ico|svg|pdf)$/,
+        type: 'asset',
+        generator: {
+          filename: 'img/[name].[contenthash:6].[ext]',
+        },
+        parser: {
+          dataUrlCondition: {
+            maxSize: 1024,
           },
-        ],
+        },
       },
       {
         test: /\.js$/,
@@ -42,10 +45,10 @@ module.exports = {
   plugins: [
     new HtmlWebPackPlugin({
       template: './src/index.html',
-      filename: 'index.html',
+      filename: './index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:6].css',
+      filename: '[name].css',
       chunkFilename: '[id].css',
     }),
   ],
